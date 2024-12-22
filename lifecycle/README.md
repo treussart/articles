@@ -2,9 +2,18 @@
 
 ## Run go program
 
+Term 1:
 ````bash
 go run -C lifecycle main.go task.go handlers.go recover.go
+````
+
+Term 2:
+````bash
 curl http://localhost:9000/task
+````
+
+Term 1:
+````bash
 ctrl-c
 ````
 
