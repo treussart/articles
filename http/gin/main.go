@@ -14,7 +14,6 @@ import (
 	"github.com/caarlos0/env/v10"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
-	"gitlab.olfeo.tech/cloud/authentication-agent/modules/common/http/server/middlewares"
 )
 
 const (
@@ -55,7 +54,7 @@ func main() {
 		logger.Fatal().Err(err).Msg("Unable to setup logger middleware")
 	}
 	mux.Use(loggerMiddleware)
-	mux.Use(middlewares.NewTimeout(config.HandlerTimeout, http.StatusRequestTimeout, "timeout request exceeds "+config.HandlerTimeout.String()))
+	mux.Use(NewTimeout(config.HandlerTimeout, http.StatusRequestTimeout, "timeout request exceeds "+config.HandlerTimeout.String()))
 
 	mux.GET("/taskcancel", taskHandlerWithDetectCancel(logger))
 
