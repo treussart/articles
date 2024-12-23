@@ -62,20 +62,20 @@ func main() {
 		ReadTimeout:  config.ReadTimeout,
 		WriteTimeout: config.WriteTimeout,
 	}
+	// WaitGroup waits for a collection of goroutines to finish, pass this by address
+	waitGroup := &sync.WaitGroup{}
+
 	// Run HTTP server
+	waitGroup.Add(1)
 	go func() {
+		defer waitGroup.Done()
 		errListen := server.ListenAndServe()
 		if err != nil && !errors.Is(errListen, http.ErrServerClosed) {
 			logger.Fatal().Err(errListen).Msg("server.ListenAndServe error")
 		}
 	}()
 
-	// WaitGroup waits for a collection of goroutines to finish, pass this by address
-	waitGroup := &sync.WaitGroup{}
-
-	waitGroup.Add(1)
 	go func() {
-		defer waitGroup.Done()
 		<-ctx.Done()
 		logger.Info().Msg("HTTP server cancelled")
 		timeoutCtx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
