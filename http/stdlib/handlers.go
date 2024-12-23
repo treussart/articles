@@ -24,10 +24,14 @@ func taskHandlerWithDetectCancel(logger zerolog.Logger) func(http.ResponseWriter
 		go func() {
 			// Perform task operation
 			logger.Info().Msg("Performing task handler started...")
+			// task 1
 			time.Sleep(taskDuration / 2)
+			// test if context cancelled (Client-side cancelled requests) or deadline exceeded (Server-side cancelled requests).
+			// to get out as soon as possible.
 			if r.Context().Err() != nil {
 				done <- r.Context().Err()
 			}
+			// task 2
 			time.Sleep(taskDuration / 2)
 			logger.Info().Msg("Performing task handler ended...")
 			done <- nil
