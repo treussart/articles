@@ -1,5 +1,7 @@
 # github.com/treussart/articles/http
 
+[Link to published article](https://medium.com/@matthieu.treussart/golang-http-request-management-on-the-server-side-c7f83fba2d6a)
+
 ## Stdlib
 
 ### Simulate client-side cancelled requests
