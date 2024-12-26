@@ -1,4 +1,4 @@
-module github.com/treussart/articles/http/gin
+module github.com/treussart/articles/http/server/gin
 
 go 1.23.0
 

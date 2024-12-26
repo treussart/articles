@@ -1,4 +1,4 @@
-module github.com/treussart/articles/http/server
+module github.com/treussart/articles/http/server/stdlib
 
 go 1.23.0
 
