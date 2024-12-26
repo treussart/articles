@@ -56,7 +56,7 @@ func main() {
 			http.TimeoutHandler(mux, config.HandlerTimeout, fmt.Sprintf("server timed out, request exceeded %s\n", config.HandlerTimeout)),
 			logger,
 		),
-		ErrorLog:     log.New(logger, "", 0),
+		ErrorLog:     log.New(logger, "", log.LstdFlags),
 		ReadTimeout:  config.ReadTimeout,
 		WriteTimeout: config.WriteTimeout,
 	}
