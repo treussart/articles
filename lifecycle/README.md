@@ -1,5 +1,7 @@
 # github.com/treussart/articles/lifecycle
 
+[Link to published article](https://medium.com/@matthieu.treussart/the-go-application-lifecycle-in-kubernetes-927ab475d643)
+
 ## Run go program
 
 Term 1:
