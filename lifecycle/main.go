@@ -22,9 +22,10 @@ const (
 )
 
 type Config struct {
-	ServicePort  string        `env:"SERVICE_PORT" envDefault:"9000"`
-	ReadTimeout  time.Duration `env:"READ_TIMEOUT" envDefault:"20s"`
-	WriteTimeout time.Duration `env:"WRITE_TIMEOUT" envDefault:"20s"`
+	ServicePort    string        `env:"SERVICE_PORT" envDefault:"9000"`
+	ReadTimeout    time.Duration `env:"READ_TIMEOUT" envDefault:"20s"`
+	WriteTimeout   time.Duration `env:"WRITE_TIMEOUT" envDefault:"20s"`
+	HandlerTimeout time.Duration `env:"HANDLER_TIMEOUT" envDefault:"12s"`
 }
 
 func NewConfig() (*Config, error) {
@@ -56,9 +57,12 @@ func main() {
 	mux.HandleFunc("/ready", readyHandler(logger))
 	mux.HandleFunc("/task", taskHandler(logger))
 	server := &http.Server{
-		Addr:         ":" + config.ServicePort,
-		Handler:      recovery(mux, logger),
-		ErrorLog:     log.New(logger, "", 0),
+		Addr: ":" + config.ServicePort,
+		Handler: recovery(
+			http.TimeoutHandler(mux, config.HandlerTimeout, fmt.Sprintf("server timed out, request exceeded %s\n", config.HandlerTimeout)),
+			logger,
+		),
+		ErrorLog:     log.New(logger, "", log.LstdFlags),
 		ReadTimeout:  config.ReadTimeout,
 		WriteTimeout: config.WriteTimeout,
 	}

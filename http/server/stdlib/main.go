@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	ServiceName  = "http/server"
+	ServiceName  = "http.server"
 	taskDuration = 12 * time.Second
 )
 
