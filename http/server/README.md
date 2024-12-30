@@ -8,7 +8,7 @@
 
 Term 1:
 ````bash
-go run -C stdlib main.go handlers.go recover.go
+go run -C http/server/stdlib ./...
 ````
 
 Term 2:
@@ -27,7 +27,7 @@ Output :
 
 Term 1:
 ````bash
-go run -C stdlib main.go handlers.go recover.go
+go run -C http/server/stdlib ./...
 ````
 
 Term 2:
@@ -49,7 +49,7 @@ Output :
 
 Term 1:
 ````bash
-go run -C gin main.go handlers.go recover.go timeout.go logger.go
+go run -C http/server/gin ./...
 ````
 
 Term 2:
@@ -68,7 +68,7 @@ Output :
 
 Term 1:
 ````bash
-go run -C gin main.go handlers.go recover.go timeout.go logger.go
+go run -C http/server/gin ./...
 ````
 
 Term 2:

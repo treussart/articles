@@ -4,7 +4,7 @@
 
 Term 1:
 ````bash
-go run -C lifecycle main.go task.go handlers.go recover.go
+go run -C lifecycle ./...
 ````
 
 Term 2:

@@ -12,7 +12,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/caarlos0/env/v10"
 	"github.com/rs/zerolog"
 )
 
@@ -20,21 +19,6 @@ const (
 	ServiceName  = "lifecycle"
 	taskDuration = 10 * time.Second
 )
-
-type Config struct {
-	ServicePort    string        `env:"SERVICE_PORT" envDefault:"9000"`
-	ReadTimeout    time.Duration `env:"READ_TIMEOUT" envDefault:"20s"`
-	WriteTimeout   time.Duration `env:"WRITE_TIMEOUT" envDefault:"20s"`
-	HandlerTimeout time.Duration `env:"HANDLER_TIMEOUT" envDefault:"12s"`
-}
-
-func NewConfig() (*Config, error) {
-	config := new(Config)
-	if err := env.Parse(config); err != nil {
-		return nil, fmt.Errorf("env.Parse: %w", err)
-	}
-	return config, nil
-}
 
 func main() {
 	// Step 1: start
